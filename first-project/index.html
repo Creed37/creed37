@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>c-FITNESS - Premium Nigerian Fitness Centers</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #4ecdc4;
+            --dark-color: #292f36;
+            --light-color: #f7fff7;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+        }
+        
+        .navbar-brand span {
+            color: var(--primary-color);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 0;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .location-card {
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .location-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .testimonial-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+        }
+        
+        .pricing-card {
+            transition: all 0.3s;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .popular-plan {
+            border: 2px solid var(--primary-color);
+            position: relative;
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .tracking-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+        }
+        
+        .map-container {
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .social-icon {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .social-icon:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Dashboard specific styles */
+        .sidebar {
+            min-height: 100vh;
+            background-color: var(--dark-color);
+            color: white;
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+        
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+        
+        .stats-card {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .workout-progress {
+            height: 10px;
+            border-radius: 5px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 100px 0;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">c<span>FITNESS</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#locations">Locations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#classes">Classes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tracking">Tracking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Subscription</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary" href="#">Join Now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+   <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="hero-title display-3 fw-bold mb-4">Transform Your Life With c-FITNESS</h1>
+            <p class="lead mb-5">Nigeria's premier fitness centers with state-of-the-art facilities across major cities</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#pricing" class="btn btn-primary btn-lg px-4">Get Started</a>
+                <a href="#locations" class="btn btn-outline-light btn-lg px-4">Our Locations</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Modern Equipment</h3>
+                    <p>World-class fitness equipment from leading brands to help you achieve your goals faster.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Expert Trainers</h3>
+                    <p>Certified Nigerian fitness professionals to guide you through every step of your journey.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Multiple Locations</h3>
+                    <p>Conveniently located centers in Lagos, Abuja, Ekiti, and other major cities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section id="locations" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">Our Locations Across Nigeria</h2>
+                <p class="lead">Find a <strong>c-FITNESS</strong> center near you</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Lagos -->
+                <div class="col-md-4">
+                    <div class="card location-card h-100">
+                        <img src="./images/danielle-cerullo-CQfNt66ttZM-unsplash.jpg" alt="Lagos Gym">
+                        <div class="card-body">
+                            <h5 class="card-title">Victoria Island, Lagos</h5>
+                            <p class="card-text">12 Adeola Street, Victoria Island, Lagos</p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item"><i class="fas fa-clock me-2"></i> Mon-Fri: 5am - 10pm</li>
+                                <li class="list-group-item"><i class="fas fa-clock me-2"></i> Sat-Sun: 7am - 8pm</li>
+                                <li class="list-group-item"><i class="fas fa-phone me-2"></i> +234 803 571 0068</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary">View Center</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Abuja -->
+                <div class="col-md-4">
+                    <div class="card location-card h-100">
+                        <img src="./images/samuel-girven-fqMu99l8sqo-unsplash.jpg" alt="Abuja Gym">
+                        <div class="card-body">
+                            <h5 class="card-title">Maitama, Abuja</h5>
+                            <p class="card-text">56 Aminu Kano Crescent, Maitama, Abuja</p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item"><i class="fas fa-clock me-2"></i> Mon-Fri: 5am - 10pm</li>
+                                <li class="list-group-item"><i class="fas fa-clock me-2"></i> Sat-Sun: 7am - 8pm</li>
+                                <li class="list-group-item"><i class="fas fa-phone me-2"></i> +234 813 976 9661</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary">View Center</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Port Harcourt -->
+                <div class="col-md-4">
+                    <div class="card location-card h-100">
+                        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Port Harcourt Gym">
+                        <div class="card-body">
+                            <h5 class="card-title">Housing Estate, Ekiti</h5>
+                            <p class="card-text">10th Avenue, Housing Estate, Ado-Ekiti</p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item"><i class="fas fa-clock me-2"></i> Mon-Fri: 5am - 10pm</li>
+                                <li class="list-group-item"><i class="fas fa-clock me-2"></i> Sat-Sun: 7am - 8pm</li>
+                                <li class="list-group-item"><i class="fas fa-phone me-2"></i> +234 906 124 8341</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary">View Center</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#locations" class="btn btn-outline-primary btn-lg">View All Locations</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Classes Section -->
+    <section id="classes" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">Our Fitness Classes</h2>
+                <p class="lead">Professional training for all fitness levels</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="./images/jared-rice-NTyBbu66_SI-unsplash.jpg" class="card-img-top" alt="Yoga Class">
+                        <div class="card-body">
+                            <br>
+                            <br>
+                            <h5 class="card-title">Yoga & Meditation</h5>
+                            <p class="card-text">Improve flexibility, balance and mental clarity with our expert-led yoga sessions.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">Mon, Wed, Fri</span>
+                                <span class="text-muted">8am, 5pm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="./images/samuel-girven-RrCvrrYtlqQ-unsplash.jpg" class="card-img-top" alt="HIIT Class">
+                        <div class="card-body">
+                            <h5 class="card-title">HIIT Training</h5>
+                            <p class="card-text">High Intensity Interval Training to burn maximum calories in minimum time.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">Tue, Thu, Sat</span>
+                                <span class="text-muted">7am, 6pm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="./images/wade-austin-ellis-oLapu_IzzVA-unsplash.jpg" class="card-img-top" alt="Boxing Class">
+                        <div class="card-body">
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <h5 class="card-title">Boxing & MMA</h5>
+                            <p class="card-text">Learn self-defense techniques while getting an incredible full-body workout.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">Mon-Fri</span>
+                                <span class="text-muted">4pm, 7pm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section id="tracking" class="tracking-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="display-5 fw-bold mb-4">Track Your Fitness Journey</h2>
+                    <p class="lead mb-4">Our advanced tracking system helps you monitor your progress and stay motivated.</p>
+                    
+                    <div class="mb-4">
+                        <h4><i class="fas fa-running me-2"></i> Running & Distance Tracking</h4>
+                        <p>Track your runs with GPS, monitor distance, pace, and calories burned with our mobile app.</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4><i class="fas fa-heartbeat me-2"></i> Health Monitoring</h4>
+                        <p>Connect wearable devices to track heart rate, sleep patterns, and overall health metrics.</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4><i class="fas fa-trophy me-2"></i> Achievements & Goals</h4>
+                        <p>Set personal goals and earn badges as you reach new fitness milestones.</p>
+                    </div>
+                    
+                    <div class="d-flex gap-3">
+                        <a href="#" class="btn btn-primary btn-lg">
+                            <i class="fab fa-apple me-2"></i> App Store
+                        </a>
+                        <a href="#" class="btn btn-light btn-lg">
+                            <i class="fab fa-google-play me-2"></i> Play Store
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <img src="./images/urban-vintage-8TJbrQGKFyU-unsplash.jpg" class="img-fluid rounded shadow" alt="Fitness Tracking App">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">What Our Members Say</h2>
+                <p class="lead">Success stories from our Nigerian community</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <img src="./images/IMG_1107.PNG" class="testimonial-img mb-3" alt="Amina">
+                            <h5>Amina Yusuf</h5>
+                            <p class="text-muted">Lagos Member</p>
+                            <p class="card-text">"<strong>c-FITNESS</strong> changed my life! I lost 15kg in 4 months with their personalized training program. The Victoria Island center has everything I need."</p>
+                            <div class="text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <img src="./images/IMG_1108.PNG" class="testimonial-img mb-3" alt="Emeka">
+                            <h5>Emeka Okonkwo</h5>
+                            <p class="text-muted">Abuja Member</p>
+                            <p class="card-text">"The trainers at <strong>c-FITNESS</strong> Maitama are exceptional. They understand Nigerian bodies and create realistic programs that deliver results."</p>
+                            <div class="text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <img src="./images/IMG_E1109.JPG" class="testimonial-img mb-3" alt="Chioma">
+                            <h5>Chioma Adeleke</h5>
+                            <p class="text-muted">Ekiti Member</p>
+                            <p class="card-text">"I love the community at <strong>c-FITNESS</strong> PH. The running club helped me prepare for my first marathon. The tracking app keeps me motivated daily."</p>
+                            <div class="text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">Membership Plans</h2>
+                <p class="lead">Affordable options for every fitness goal</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Basic Plan -->
+                <div class="col-md-4">
+                    <div class="card pricing-card h-100">
+                        <div class="card-body text-center p-4">
+                            <h5 class="card-title">Basic</h5>
+                            <h2 class="my-4">₦85,000<small class="text-muted fw-light">/mo</small></h2>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Single Location Access</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Gym Equipment Only</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Basic Tracking Features</li>
+                                <li class="mb-2"><i class="fas fa-times text-danger me-2"></i> No Class Access</li>
+                                <li class="mb-2"><i class="fas fa-times text-danger me-2"></i> No Personal Trainer</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Choose Plan</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Popular Plan -->
+                <div class="col-md-4">
+                    <div class="card pricing-card h-100 popular-plan">
+                        <div class="popular-badge">MOST POPULAR</div>
+                        <div class="card-body text-center p-4">
+                            <h5 class="card-title">Premium</h5>
+                            <h2 class="my-4">₦105,000<small class="text-muted fw-light">/mo</small></h2>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> All Locations Access</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Unlimited Group Classes</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Advanced Tracking Features</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 2 Personal Training Sessions</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Nutrition Guide</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary w-100">Choose Plan</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pro Plan -->
+                <div class="col-md-4">
+                    <div class="card pricing-card h-100">
+                        <div class="card-body text-center p-4">
+                            <h5 class="card-title">Elite</h5>
+                            <h2 class="my-4">₦125,000<small class="text-muted fw-light">/mo</small></h2>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> All Locations Access</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Unlimited Everything</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Premium Tracking Features</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 8 Personal Training Sessions</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Personalized Meal Plan</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Choose Plan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <p class="text-muted">Corporate and family plans available. Contact us for details.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">Find Us Across Nigeria</h2>
+                <p class="lead">We're expanding to serve you better</p>
+            </div>
+            
+            <div class="map-container mb-4">
+                <!-- In a real implementation, you would embed a Google Map or similar with Nigerian locations marked -->
+                <img src="./images/ima-enoch-rfB2_8PujeE-unsplash.jpg" class="img-fluid w-100 h-100 object-fit-cover" alt="Nigeria Map with Locations">
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-3 col-6 text-center">
+                    <h3>Lagos</h3>
+                    <p class="text-muted">3 Centers</p>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <h3>Abuja</h3>
+                    <p class="text-muted">2 Centers</p>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <h3>Ekiti</h3>
+                    <p class="text-muted">1 Center</p>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <h3>Coming Soon</h3>
+                    <p class="text-muted">Ibadan, Kano</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container text-center">
+            <h2 class="display-5 fw-bold mb-4">Ready to Transform Your Life?</h2>
+            <p class="lead mb-5">Join thousands of Nigerians who have achieved their fitness goals with c-FITNESS</p>
+            <a href="#pricing" class="btn btn-light btn-lg px-4 me-3">Join Now</a>
+            <a href="#contact" class="btn btn-outline-light btn-lg px-4">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="display-5 fw-bold mb-4">Contact Us</h2>
+                    <p class="lead mb-4">Have questions? We're here to help!</p>
+                    
+                    <div class="mb-4">
+                        <h5><i class="fas fa-headset me-2"></i> Customer Support</h5>
+                        <p>+234 700 343 8466 (c-FITNESS)</p>
+                        <p>support@cfitness.ng</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5><i class="fas fa-clock me-2"></i> Opening Hours</h5>
+                        <p>Monday - Friday: 5:00 AM - 10:00 PM</p>
+                        <p>Saturday - Sunday: 7:00 AM - 8:00 PM</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5><i class="fas fa-map-marker-alt me-2"></i> Headquarters</h5>
+                        <p>12A Ozumba Mbadiwe Avenue, Victoria Island, Lagos, Nigeria</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Your Message</label>
+                            <textarea class="form-control" id="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h3 class="text-white mb-4">c-FITNESS</h3>
+                    <p>Nigeria's leading fitness center chain, dedicated to helping you achieve your health and wellness goals through expert guidance and world-class facilities.</p>
+                    <div class="mt-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/only1creed?s=21" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/only1creedd?igsh=MTIycnhlZW01cGE3ag%3D%3D&utm_source=qr" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="https://t.snapchat.com/bLhONcXO" class="social-icon"><i class="fab fa-snapchat"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#locations" class="text-white text-decoration-none">Locations</a></li>
+                        <li class="mb-2"><a href="#classes" class="text-white text-decoration-none">Classes</a></li>
+                        <li class="mb-2"><a href="#pricing" class="text-white text-decoration-none">Pricing</a></li>
+                        <li class="mb-2"><a href="dashboard.html" class="text-white text-decoration-none">Dashboard</a></li>
+                        <li class="mb-2"><a href="#contact" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="text-white mb-4">Our Centers</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">Lagos - Victoria Island</li>
+                        <li class="mb-2">Lagos - Lekki Phase 1</li>
+                        <li class="mb-2">Lagos - Ikeja</li>
+                        <li class="mb-2">Abuja - Maitama</li>
+                        <li class="mb-2">Abuja - Wuse 2</li>
+                        <li class="mb-2">Ekiti - Ado-Ekiti</li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="text-white mb-4">Newsletter</h5>
+                    <p>Subscribe to get fitness tips and special offers.</p>
+                    <form class="mb-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                    <p class="small">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+            
+            <hr class="my-4 bg-secondary">
+            
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small mb-0">&copy; 2023 c-FITNESS Nigeria. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small mb-0">
+                        <a href="#" class="text-white text-decoration-none">Terms of Service</a> | 
+                        <a href="#" class="text-white text-decoration-none">Privacy Policy</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dashboard Page (linked from navigation) -->
+    <!-- This would be a separate dashboard.html file -->
+    
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
